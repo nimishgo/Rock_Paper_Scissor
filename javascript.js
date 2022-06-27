@@ -51,7 +51,7 @@ function gameLogic(playerChoice,computerChoice) {
     {
         result.textContent = "Its a tie";
         // playerPoints++;
-        playScore.textContent = playerPoints;
+        // playScore.textContent = playerPoints;
 
     }
     else if(playerChoice === 'ROCK' && computerChoice === 'SCISSOR')
