@@ -1,94 +1,107 @@
+const currents = document.querySelector('.currents');
+const playerLedger = document.querySelector('.playerScore');
+const computerLedger = document.querySelector('.computerScore');
+const compScore = document.querySelector('.computerPoints');
+const playScore = document.querySelector('.playerPoints');
+const result = document.querySelector('.Result');
+const container1 = document.querySelector('.container1');
+
+let playerChoice;
+let computerChoice;
+let computerPoints = 0;
+let playerPoints = 0;
+
 function computerSelection() {
     // make a random number generator form 1 to 3
     // if 1 then its Rock 
     // if 2 then its Paper
     // if 3 then its Scissors
     const num = Math.floor(Math.random() * 3) + 1;
-
+    
     if(num === 1)
-        return 'ROCK';
+        computerChoice = `ROCK`;
     else if(num === 2)
-        return 'PAPER';
+        computerChoice = "PAPER";
     else
-        return 'SCISSOR';
+        computerChoice = "SCISSOR";
 }
+// will return a string of Rock , Paper or Scissor
+const btn = document.querySelectorAll('button');
+
+btn.forEach( e => {
+    e.addEventListener('click', (el) => {
+            playerChoice = el.target.alt;
+            // console.log(playerChoice);
+            currents.textContent = playerChoice;
+            computerSelection();
+            playerLedger.textContent = computerChoice;
+            gameLogic(playerChoice,computerChoice);
+            if(computerPoints === 5 || playerPoints === 5) {
+                el.stopPropagation();
+                btn[0].disabled = true;
+                btn[1].disabled = true;
+                btn[2].disabled = true;
+            }
+         })
+});
 
 
-    // will return a string of Rock , Paper or Scissor
-
-function playerSelection() {
-    
-    const input_txt = prompt('Enter Rock-Paper-Scissor');
-    return input_txt.toUpperCase();
-}
-
-let playerScore = 0;
-let computerScore  = 0;
-
-function playRound() {
-
-    const computerChoice = computerSelection();
-    const playerChoice = playerSelection();
-
-    
+function gameLogic(playerChoice,computerChoice) {
     if(playerChoice === computerChoice)
     {
-        console.log(`${playerChoice} and ${computerChoice} makes a draw`);
+        result.textContent = "Its a tie";
+        playerPoints++;
+        playScore.textContent = playerPoints;
+
     }
-    else if(playerChoice === 'ROCK' && computerChoice === 'PAPER')
+    else if(playerChoice === 'ROCK' && computerChoice === 'SCISSOR')
     {
-        console.log(`You lose ${computerChoice} beats ${playerChoice}`);
-        computerScore++;
+        result.textContent = `Rock beats Scissor`;
+        playerPoints++;
+        playScore.textContent = playerPoints;
     }
-    else if(playerChoice === 'SCISSOR' && computerChoice === 'ROCK')
+    else if(playerChoice === 'PAPER' && computerChoice === 'ROCK')
     {
-        console.log(`you lose ${computerChoice} beats ${playerChoice}`);
-        computerScore++;
+        result.textContent = `Paper beats rock`;
+        playerPoints++;
+        playScore.textContent = playerPoints;
     }
-    else if(playerChoice === 'PAPER' && computerChoice === 'SCISSOR')
+    else if(playerChoice === 'SCISSOR' && computerChoice === 'PAPER')
     {
-        console.log(`you lose ${computerChoice} beats ${playerChoice}`);
-        computerScore++;
+        result.textContent = `Scissor beats paper`;
+        playerPoints++;
+        playScore.textContent = playerPoints;
     }
     else
     {
-        console.log(`You Win ${playerChoice} beats ${computerChoice}`);
-        playerScore++;
+        computerPoints++;
+        result.textContent = `${computerChoice} beats ${playerChoice}`;
+        compScore.textContent = computerPoints;
     }
 
-    
-}
-
-function game() {
-    
-    for (let i = 0; i < 5; i++) {
-        playRound();
-        
-    console.log(`player score : ${playerScore} & computer score : ${computerScore}`);
-    
-    if(playerScore >= 3)
-        {
-            console.log("You won");
-            break;
-        }
-    else if(computerScore >= 3)
-        {
-            console.log("You lost");
-            break;
-        }
-    else if(playerScore === computerScore && i > 2)
-        {
-            console.log("Its a draw");
-            break;
-        }
-    }
-
-    if (playerScore > computerScore) {
-        console.log("You Won");
-    }
-    else
+    if(computerPoints >= 5)
     {
-        console.log("You Lose");
+        result.textContent = `Computer Won`;
+        result.className = 'won';
+        const reset = document.createElement('button');
+        reset.innerHTML = 'RESET';
+        reset.className = `reset_button`;
+        container1.appendChild(reset);
+        reset.addEventListener('click', () => {
+            location.reload();
+        });        
+    }
+    else if(playerPoints >= 5)
+    {
+        result.textContent = `Player Won`;
+        result.className = 'won';
+        const reset = document.createElement('button');
+        reset.innerHTML = 'RESET';
+        reset.className = `reset_button`;
+        container1.appendChild(reset);
+        reset.addEventListener('click', (e) => {
+            location.reload();
+        });
     }
 
 }
