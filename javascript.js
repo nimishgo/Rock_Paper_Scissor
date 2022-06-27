@@ -54,19 +54,19 @@ function gameLogic(playerChoice,computerChoice) {
         // playScore.textContent = playerPoints;
 
     }
-    else if(playerChoice === 'ROCK' && computerChoice === 'SCISSOR')
+    else if(playerChoice === 'Rock' && computerChoice === 'Scissor')
     {
         result.textContent = `Rock beats Scissor`;
         playerPoints++;
         playScore.textContent = playerPoints;
     }
-    else if(playerChoice === 'PAPER' && computerChoice === 'ROCK')
+    else if(playerChoice === 'Paper' && computerChoice === 'Rock')
     {
         result.textContent = `Paper beats rock`;
         playerPoints++;
         playScore.textContent = playerPoints;
     }
-    else if(playerChoice === 'SCISSOR' && computerChoice === 'PAPER')
+    else if(playerChoice === 'Scissor' && computerChoice === 'Paper')
     {
         result.textContent = `Scissor beats paper`;
         playerPoints++;
