@@ -19,11 +19,11 @@ function computerSelection() {
     const num = Math.floor(Math.random() * 3) + 1;
     
     if(num === 1)
-        computerChoice = `ROCK`;
+        computerChoice = "Rock";
     else if(num === 2)
-        computerChoice = "PAPER";
+        computerChoice = "Paper";
     else
-        computerChoice = "SCISSOR";
+        computerChoice = "Scissor";
 }
 // will return a string of Rock , Paper or Scissor
 const btn = document.querySelectorAll('button');

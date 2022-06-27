@@ -1,5 +1,6 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:'Amatic SC', cursive, Arial, Helvetica, sans-serif;
+    font-size: large;
     margin: 0px;
     display: flex;
     justify-content: center; 
@@ -10,6 +11,8 @@ body {
 }
 p {
     font-style: italic;
+    font-size: 36px;
+    font-weight: bold;
     color: black;
 }
 button {
